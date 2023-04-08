@@ -1,0 +1,1 @@
+So far we looked at all the features in the customer table and after going through each feature we are left with age grouped into age_group.
