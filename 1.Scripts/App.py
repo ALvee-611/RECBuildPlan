@@ -1,12 +1,57 @@
 import streamlit as st
-from PIL import Image
-import urllib.request
+import pandas as pd
+import numpy as np
 
-url = 'https://storage.googleapis.com/kagglesdsdata/datasets/42780/75676/natural_images/car/car_0001.jpg'
-with urllib.request.urlopen(url) as url_response:
-    img = Image.open(url_response)
-    st.image(img, caption='Image from the internet')
+from st_clickable_images import clickable_images
+
+from utils_funcs import *
+
+@st.cache_data
+def get_data():
+    data = pd.read_csv('ranked_result.csv')
+    return data
 
 
+st.sidebar.subheader("Next Page")
 
-'F:\\Notebooks\\recommedner\\Deployment\\results\\images\\0108775015.jpeg'
+
+st.title("Products By Department")
+
+st.write("---")
+
+unique_groups = get_data()['index_group_name'].unique()
+
+department_name = unique_groups
+# total items to display
+total_items = 5
+img_links = ["https://static.streamlit.io/examples/cat.jpg"]*total_items
+
+for i in department_name:
+    key_un = 'unique' + ' ' + str(i)
+    c = create_comp(i,total_items, img_links, key_unique = key_un)
+
+    st.title(c)
+
+
+from st_click_detector import click_detector
+
+clicked = clickable_images(img_links,
+                            titles=[f"Image #{str(i)}" for i in range(5)],
+                            div_style={"display": "flex", "flex-wrap": "wrap"},
+                            img_style={"margin": "5px", "height": "500px"})
+
+
+# if "my_inputs" not in st.session_state:
+#         st.session_state["my_inputs"] = ""
+
+# increment = click_detector(clicked)
+
+#st.session_state["my_inputs"] = increment
+
+if st.session_state["my_inputs"] == "Baby/Children1":
+     st.write("This is inside the container")
+
+# # Reads
+# st.title(st.session_state["my_inputs"])
+
+st.title("Products By Department")
