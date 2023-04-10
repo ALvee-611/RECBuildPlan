@@ -19,6 +19,13 @@ st.title("Products By Department")
 
 st.write("---")
 
+##TEST##
+placeholder = st.empty()
+# Another session
+if "department_input" not in st.session_state:
+    st.session_state["department_input"] = ""
+#############
+
 unique_groups = get_data()['index_group_name'].unique()
 
 department_name = unique_groups
@@ -26,32 +33,20 @@ department_name = unique_groups
 total_items = 5
 img_links = ["https://static.streamlit.io/examples/cat.jpg"]*total_items
 
-for i in department_name:
-    key_un = 'unique' + ' ' + str(i)
-    c = create_comp(i,total_items, img_links, key_unique = key_un)
-
-    st.title(c)
-
-
-from st_click_detector import click_detector
-
-clicked = clickable_images(img_links,
-                            titles=[f"Image #{str(i)}" for i in range(5)],
-                            div_style={"display": "flex", "flex-wrap": "wrap"},
-                            img_style={"margin": "5px", "height": "500px"})
-
-
-# if "my_inputs" not in st.session_state:
-#         st.session_state["my_inputs"] = ""
-
-# increment = click_detector(clicked)
-
-#st.session_state["my_inputs"] = increment
-
-if st.session_state["my_inputs"] == "Baby/Children1":
-     st.write("This is inside the container")
-
-# # Reads
-# st.title(st.session_state["my_inputs"])
-
-st.title("Products By Department")
+if st.session_state["department_input"] == "":
+    with placeholder.container():
+        for i in department_name:
+            key_un = 'unique' + ' ' + str(i)
+            c = create_comp(i,total_items, img_links, key_unique = key_un)
+else:
+    placeholder.empty()
+    with placeholder.container():
+        submit = st.button("Submit")
+        if submit:
+            st.session_state["department_input"] = "A" 
+            if st.session_state["department_input"] == "A":
+                with st.container():
+                    for i in department_name:
+                        key_un = 'unique' + ' ' + str(i)
+                        c = create_comp(i,total_items, img_links, key_unique = key_un)
+                    placeholder.empty()
