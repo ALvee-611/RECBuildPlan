@@ -70,3 +70,17 @@ def dispaly_images(article_list,folder_location):
         plt.axis('off')
         plt.show()
 
+
+
+def detail_process(user_input):
+    """
+    Preprocess user input and reduce feature size
+    """
+    #Get embeddings for the sentences
+    sentence_embeddings = model_nlp.encode(user_input).reshape(1, -1)
+    # reduce number of features:
+    # Load the PCA model from file
+    with open('..\\..\\assets\\good_small_pca_model.pkl', 'rb') as f:
+        pca = pickle.load(f)
+    processed = pca.transform(sentence_embeddings)
+    return processed
