@@ -9,6 +9,7 @@ Test_all
 New_test
 Test.ipynb
 app.py
+assets/
 helper.py
 __pycache__/
 data/
