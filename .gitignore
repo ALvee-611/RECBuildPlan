@@ -4,6 +4,9 @@ project_plan.txt
 config.ini
 query.sql
 Processed_Images
+Processed_Images_2
+data_col.ipynb
+popularity_V2.db
 Test_images
 Test_all
 New_test
@@ -13,3 +16,4 @@ assets/
 helper.py
 __pycache__/
 data/
+mini_product_card.db
