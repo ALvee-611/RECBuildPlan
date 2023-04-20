@@ -8,3 +8,7 @@ Test_images
 Test_all
 New_test
 Test.ipynb
+app.py
+helper.py
+__pycache__/
+data/
