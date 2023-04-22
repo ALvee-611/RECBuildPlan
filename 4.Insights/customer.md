@@ -2,8 +2,9 @@ So far we looked at all the features in the customer table and after going throu
 
 Here's a template for an R Markdown file to document insights in a GitHub repository:
 
+## [Playing with Soccer data](https://github.com/alexattia/Data-Science-Projects/tree/master/KaggleSoccer)
 
-```python
+
 # Python code to generate the insight
 
 # Insights
@@ -20,7 +21,6 @@ Describe the analysis performed to generate the insights, including any data cle
 ### Insight 1
 Provide a descriptive title for the first insight and a brief summary of what it reveals.
 
-```python
 # Python code to generate the insight
 
 ### Insight 2
@@ -34,7 +34,7 @@ Provide a descriptive title for the second insight and a brief summary of what i
 Provide a descriptive title for the third insight and a brief summary of what it reveals.
 
 
-```python
+
 # Python code to generate the insight
 
 ## Conclusion
@@ -47,5 +47,5 @@ Include any references to sources used in the analysis, including data sources a
 Include any additional details on the analysis performed or any supplementary data used, if applicable. 
 
 
-```python
+
 # Python code to generate the insight
