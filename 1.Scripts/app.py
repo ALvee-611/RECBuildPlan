@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 loc = os.getcwd()
-missing_img_path = os.path.join(loc, 'Processed_Images_2', 'img_missing.jpg')
+missing_img_path = os.path.join(loc, '../Processed_Images_2', 'img_missing.jpg')
 
 @st.cache_resource
 def load_model():
