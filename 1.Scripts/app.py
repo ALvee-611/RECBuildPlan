@@ -81,7 +81,10 @@ if 'rec_article_id' not in st.session_state:
 
 @st.cache_resource
 def get_products(offset=0):
-    conn = sqlite3.connect(r'..\4. Data\popularity_V2.db')
+    loc = os.getcwd()
+    path = os.path.join(loc, '4. Data', 'popularity_V2.db')
+    #conn = sqlite3.connect(r'..\4. Data\popularity_V2.db')
+    conn = sqlite3.connect(path)
     c = conn.cursor()
     c.execute("""SELECT DISTINCT article_id, ranked
                 FROM (
