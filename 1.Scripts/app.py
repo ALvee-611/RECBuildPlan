@@ -13,6 +13,9 @@ st.set_page_config(
     layout="wide"
 )
 
+loc = os.getcwd()
+missing_img_path = os.path.join(loc, 'Processed_Images_2', 'img_missing.jpg')
+
 @st.cache_resource
 def load_model():
     model_nlp = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
@@ -99,7 +102,10 @@ def get_products(offset=0):
 
 @st.cache_resource
 def get_product_details(product_id):
-    conn = sqlite3.connect(r'..\4. Data\mini_product_card.db')
+    loc = os.getcwd()
+    path = os.path.join(loc, '4. Data', 'mini_product_card.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect(r'..\4. Data\mini_product_card.db')
     c = conn.cursor()
     c.execute("""SELECT prod_name, detail_desc
         FROM name_desc_id
@@ -110,7 +116,10 @@ def get_product_details(product_id):
 
 @st.cache_resource
 def get_description_features():
-    conn = sqlite3.connect('data//product_description.db')
+    loc = os.getcwd()
+    path = os.path.join(loc, '4. Data', 'product_description.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('data//product_description.db')
     c = conn.cursor()
     c.execute("""SELECT *
         FROM detail_desc
@@ -121,7 +130,10 @@ def get_description_features():
 
 @st.cache_resource
 def get_product_desc(description):
-    conn = sqlite3.connect('data//mini_product_card.db')
+    loc = os.getcwd()
+    path = os.path.join(loc, '4. Data', 'mini_product_card.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('data//mini_product_card.db')
     c = conn.cursor()
     c.execute("""SELECT article_id, prod_name, detail_desc 
               FROM name_desc_id 
@@ -135,11 +147,12 @@ def detail_process(user_input, model_nlp):
     """
     Preprocess user input and reduce feature size
     """
-    pca_model_path = 'assets'
+    loc = os.getcwd()
+    pca_model_path = '5. Assets'
     pca_model_name = 'good_small_pca_model.pkl'
 
     # Locating the pca model location
-    pca_loc = os.path.join(pca_model_path, pca_model_name)
+    pca_loc = os.path.join(loc, pca_model_path, pca_model_name)
     
     #Get embeddings for the sentences
     sentence_embeddings = model_nlp.encode(user_input).reshape(1, -1)
@@ -160,12 +173,17 @@ def find_neighbors(df):
 @st.cache_resource
 def get_images(article_id):
     file_name = '0' + str(article_id) +'.jpg'
-    img_path = os.path.join('..\\Processed_Images_2', file_name)
+    loc = os.getcwd()
+    #path = os.path.join(loc, '4. Data', 'mini_product_card.db')
+    img_path = os.path.join(loc, 'Processed_Images_2', file_name)
     return img_path
 
 @st.cache_resource
 def get_full_df():
-    conn = sqlite3.connect('..\\4. Data\\mini_production_processed.db')
+    loc = os.getcwd()
+    path = os.path.join(loc, '4. Data', 'mini_production_processed.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('..\\4. Data\\mini_production_processed.db')
     c = conn.cursor()
     c.execute("""SELECT *
         FROM main_processed
@@ -217,7 +235,7 @@ if st.session_state['show_search_items']:
                     try:
                         st.image(get_images(st.session_state['search_article_id']))
                     except:
-                        st.image('..\\Processed_Images_2\\img_missing.jpg')
+                        st.image(missing_img_path)
 
                     st.subheader(a[0][0])
 
@@ -262,7 +280,8 @@ def show_recommended_items(item_liked):
                     try:
                         st.image(get_images(st.session_state['rec_article_id']))
                     except:
-                        st.image('..\\Processed_Images_2\\img_missing.jpg')
+                        #st.image('..\\Processed_Images_2\\img_missing.jpg')
+                        st.image(missing_img_path)
 
                     st.subheader(a[0][0])
 
@@ -290,7 +309,8 @@ def show_popular_items(offset):
                 try:
                     st.image(get_images(st.session_state['popular_article_id']))
                 except:
-                    st.image('..\\Processed_Images_2\\img_missing.jpg')
+                    #st.image('..\\Processed_Images_2\\img_missing.jpg')
+                    st.image(missing_img_path)
                 st.subheader(a[0][0])
 
                 st.write(a[0][1])
