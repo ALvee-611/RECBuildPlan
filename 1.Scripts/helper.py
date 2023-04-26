@@ -87,58 +87,58 @@ FROM all_features
 
 import os
 import pandas as pd
-import configparser
+# import configparser
 import matplotlib.image as mpimg
-from sqlalchemy import create_engine, text as sql_text
+# from sqlalchemy import create_engine, text as sql_text
 
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 import pickle
 
-config = configparser.ConfigParser()
-config.read('..\\..\\config.ini')
+# config = configparser.ConfigParser()
+# config.read('..\\..\\config.ini')
 
-host = config['mysql']['host']
-database = config['mysql']['database']
-user = config['mysql']['user']
-password = config['mysql']['password']
-port = config['mysql']['port']
+# host = config['mysql']['host']
+# database = config['mysql']['database']
+# user = config['mysql']['user']
+# password = config['mysql']['password']
+# port = config['mysql']['port']
 
-def read_query(query):
-    engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}:{port}/{database}')
-    df = pd.read_sql_query(sql = sql_text(query), con=engine.connect())
-    print('Query Executed!')
-    return df
+# def read_query(query):
+#     engine = create_engine(f'mysql+pymysql://{user}:{password}@{host}:{port}/{database}')
+#     df = pd.read_sql_query(sql = sql_text(query), con=engine.connect())
+#     print('Query Executed!')
+#     return df
 
 
-def get_popular_item_rank(day_type):
-    """
-    get all items for each department ranked
-    """
-    if day_type == "weekday":
-        q = """
-        SELECT article_id, index_group_name, ranked
-        FROM (
-        SELECT article_id, index_group_name, day_type,
-        RANK() OVER (PARTITION BY index_group_name,day_type ORDER BY total_purchases DESC) AS ranked
-        FROM popularity_v1) R
-        where day_type = "weekday";
-        """
-    else:
-        q = """
-        SELECT article_id, index_group_name, ranked
-        FROM (
-        SELECT article_id, index_group_name, day_type,
-        RANK() OVER (PARTITION BY index_group_name,day_type ORDER BY total_purchases DESC) AS ranked
-        FROM popularity_v1) R
-        where day_type = "weekend";
-        """
+# def get_popular_item_rank(day_type):
+#     """
+#     get all items for each department ranked
+#     """
+#     if day_type == "weekday":
+#         q = """
+#         SELECT article_id, index_group_name, ranked
+#         FROM (
+#         SELECT article_id, index_group_name, day_type,
+#         RANK() OVER (PARTITION BY index_group_name,day_type ORDER BY total_purchases DESC) AS ranked
+#         FROM popularity_v1) R
+#         where day_type = "weekday";
+#         """
+#     else:
+#         q = """
+#         SELECT article_id, index_group_name, ranked
+#         FROM (
+#         SELECT article_id, index_group_name, day_type,
+#         RANK() OVER (PARTITION BY index_group_name,day_type ORDER BY total_purchases DESC) AS ranked
+#         FROM popularity_v1) R
+#         where day_type = "weekend";
+#         """
 
-    return read_query(q)
+#     return read_query(q)
 
-#Test
-get_popular_item_rank('weekend')
+# #Test
+# get_popular_item_rank('weekend')
 
 
 
