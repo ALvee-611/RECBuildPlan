@@ -3,6 +3,8 @@ import sqlite3
 import os
 import numpy as np
 
+
+
 st.cache_resource
 def read_query(q, db_name):
     loc = os.getcwd()
