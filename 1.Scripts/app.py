@@ -1,4 +1,10 @@
 import streamlit as st
+
+st.set_page_config(
+    page_title='Item Recommender',
+    layout="wide"
+)
+
 import sqlite3
 from sentence_transformers import SentenceTransformer
 from sentence_transformers import util
@@ -10,10 +16,6 @@ import pandas as pd
 
 from helper import *
 
-st.set_page_config(
-    page_title='Item Recommender',
-    layout="wide"
-)
 
 loc = os.getcwd()
 missing_img_path = os.path.join(loc, 'Processed_Images_2', 'img_missing.jpg')
