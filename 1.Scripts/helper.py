@@ -62,7 +62,7 @@ def get_popular_item_rank():
         RANK() OVER (PARTITION BY index_group_name,day_type ORDER BY total_purchases DESC) AS ranked
         FROM popular) R;
         """
-    return read_query(q, 'popularity.db')
+    return read_query(q, 'popularity_V2.db')
 
 @st.cache_data
 def unique_departments():
@@ -71,7 +71,7 @@ def unique_departments():
     FROM popular
     GROUP BY index_group_name
     """
-    return np.array(read_query(q, 'popularity.db'))
+    return np.array(read_query(q, 'popularity_V2.db'))
 
 all_groups = unique_departments()
 
