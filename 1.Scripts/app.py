@@ -85,9 +85,9 @@ if 'rec_article_id' not in st.session_state:
 @st.cache_resource
 def get_products(offset=0):
     loc = os.getcwd()
-    #path = os.path.join(loc, '4. Data', 'popularity_V2.db')
-    conn = sqlite3.connect(r'..\4. Data\popularity_V2.db')
-    #conn = sqlite3.connect(path)
+    path = os.path.join(loc, '4. Data', 'popularity_V2.db')
+    #conn = sqlite3.connect(r'..\4. Data\popularity_V2.db')
+    conn = sqlite3.connect(path)
     c = conn.cursor()
     c.execute("""SELECT DISTINCT article_id, ranked
                 FROM (
@@ -103,9 +103,9 @@ def get_products(offset=0):
 @st.cache_resource
 def get_product_details(product_id):
     loc = os.getcwd()
-    #path = os.path.join(loc, '4. Data', 'mini_product_card.db')
-    #conn = sqlite3.connect(path)
-    conn = sqlite3.connect(r'..\4. Data\mini_product_card.db')
+    path = os.path.join(loc, '4. Data', 'mini_product_card.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect(r'..\4. Data\mini_product_card.db')
     c = conn.cursor()
     c.execute("""SELECT prod_name, detail_desc
         FROM name_desc_id
@@ -118,8 +118,8 @@ def get_product_details(product_id):
 def get_description_features():
     loc = os.getcwd()
     path = os.path.join(loc, '4. Data', 'product_description.db')
-    #conn = sqlite3.connect(path)
-    conn = sqlite3.connect('data//product_description.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('data//product_description.db')
     c = conn.cursor()
     c.execute("""SELECT *
         FROM detail_desc
@@ -132,8 +132,8 @@ def get_description_features():
 def get_product_desc(description):
     loc = os.getcwd()
     path = os.path.join(loc, '4. Data', 'mini_product_card.db')
-    #conn = sqlite3.connect(path)
-    conn = sqlite3.connect('data//mini_product_card.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('data//mini_product_card.db')
     c = conn.cursor()
     c.execute("""SELECT article_id, prod_name, detail_desc 
               FROM name_desc_id 
@@ -182,8 +182,8 @@ def get_images(article_id):
 def get_full_df():
     loc = os.getcwd()
     path = os.path.join(loc, '4. Data', 'mini_production_processed.db')
-    #conn = sqlite3.connect(path)
-    conn = sqlite3.connect('..\\4. Data\\mini_production_processed.db')
+    conn = sqlite3.connect(path)
+    #conn = sqlite3.connect('..\\4. Data\\mini_production_processed.db')
     c = conn.cursor()
     c.execute("""SELECT *
         FROM main_processed
