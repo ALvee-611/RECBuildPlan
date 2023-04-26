@@ -1,11 +1,11 @@
 from PIL import Image
 import os
 
-image_folder_location = "..\\h-and-m-personalized-fashion-recommendations\images"
-processed_folder_location = "..\\Processed_Images"
-max_width = 500
-max_height = 500
-quality = 50
+image_folder_location = "C:\\Users\\alvee\\Downloads\\images"
+processed_folder_location = r"C:\Users\alvee\OneDrive\Documents\DS Project\RECBuildPlan\Processed_Images"
+max_width = 400
+max_height = 400
+quality = 35
 
 ## Reduce Image quality to save space and merge all files from different subfolders contained in the image_folder_location parent folders
 ##  into one folder.
@@ -36,7 +36,7 @@ def image_size_reduce(image_folder_location, output_location, max_width, max_hei
                 output_path = os.path.join(output_location, image_file)
                 image.save(output_path, optimize=True, quality=quality)
 
-                print("Completed!")
+    print("Completed!")
 
 
 if __name__ == "__main__":
