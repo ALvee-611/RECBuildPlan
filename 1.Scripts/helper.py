@@ -19,6 +19,33 @@ def read_query(q, db_name):
 
     return results
 
+import re
+import string
+
+@st.cache_resource
+def clean_name(prod_name):
+    # remove text inside parentheses
+    prod_name = re.sub(r'\(.*?\)', '', prod_name)
+
+    punctuations = string.punctuation + '–'
+    translator = str.maketrans('', '', punctuations)
+    prod_name = prod_name.translate(translator)
+    
+    # split the product name into words
+    word = prod_name.split()
+    
+    # remove 2-letter words
+    word = [w for w in word if len(w) > 2]
+    
+    # capitalize the first letter of each word
+    words = [w.capitalize() for w in word]
+    
+    # join the words back into a string
+    cleaned_name = ' '.join(words)
+    
+    return cleaned_name
+
+
 
 
 def get_popular_item_rank():

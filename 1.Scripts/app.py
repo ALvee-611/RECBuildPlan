@@ -8,6 +8,8 @@ from sklearn.neighbors import NearestNeighbors
 import numpy as np
 import pandas as pd
 
+from helper import *
+
 st.set_page_config(
     page_title='Item Recommender',
     layout="wide"
@@ -237,7 +239,7 @@ if st.session_state['show_search_items']:
                     except:
                         st.image(missing_img_path)
 
-                    st.subheader(a[0][0])
+                    st.subheader(clean_name(a[0][0]))
 
                     st.write(a[0][1])
 
@@ -283,7 +285,7 @@ def show_recommended_items(item_liked):
                         #st.image('..\\Processed_Images_2\\img_missing.jpg')
                         st.image(missing_img_path)
 
-                    st.subheader(a[0][0])
+                    st.subheader(clean_name(a[0][0]))
 
                     st.write(a[0][1])
 
@@ -311,7 +313,7 @@ def show_popular_items(offset):
                 except:
                     #st.image('..\\Processed_Images_2\\img_missing.jpg')
                     st.image(missing_img_path)
-                st.subheader(a[0][0])
+                st.subheader(clean_name(a[0][0]))
 
                 st.write(a[0][1])
 

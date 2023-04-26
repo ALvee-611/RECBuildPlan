@@ -3,6 +3,7 @@ click_predict
 project_plan.txt
 config.ini
 query.sql
+scaling_down.ipynb
 Processed_Images
 data_col.ipynb
 popularity.db
